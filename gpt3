@@ -79,6 +79,7 @@ request_params = {
     "n": 1,
     "stop": None,
     "temperature": args.temperature,
+    "timeout": 60,
 }
 
 if args.debug:
