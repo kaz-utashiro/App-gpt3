@@ -10,7 +10,7 @@ Usage:
 
 Options:
     -e, --engine: The OpenAI GPT-3 engine to use (default: gpt-3.5-turbo)
-    -m, --max_tokens: Maximum number of tokens in the response (default: 100)
+    -m, --max-tokens: Maximum number of tokens in the response (default: 100)
     -t, --temperature: Sampling temperature for randomness (default: 0.5)
     -d, --debug: Show the full response in JSON format (default: False)
     --key: OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)
@@ -31,10 +31,10 @@ parser = argparse.ArgumentParser(description="GPT-3 API command line wrapper")
 
 parser.add_argument("prompt", nargs="?", type=str, help="Input prompt for GPT-3 or '-' to read from stdin")
 parser.add_argument("-e", "--engine", type=str, default="gpt-3.5-turbo", help="OpenAI GPT-3 engine (default: gpt-3.5-turbo)")
-parser.add_argument("-m", "--max_tokens", type=int, default=100, help="Maximum number of tokens in the response (default: 100)")
+parser.add_argument("-m", "--max-tokens", type=int, default=100, help="Maximum number of tokens in the response (default: 100)")
 parser.add_argument("-t", "--temperature", type=float, default=0.5, help="Sampling temperature for randomness (default: 0.5)")
-parser.add_argument("--key", type=str, default=None, help="OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)")
 parser.add_argument("-d", "--debug", action="store_true", help="Show the full response in JSON format (default: False)")
+parser.add_argument("-k", "--key", type=str, default=None, help="OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)")
 
 args = parser.parse_args()
 
@@ -43,7 +43,7 @@ if api_key is None:
     raise ValueError("Please set the environment variable OPENAI_API_KEY or provide the API key using the --key option.")
 openai.api_key = api_key
 
-if args.prompt == "-":
+if args.prompt is None or args.prompt == "-":
     prompt = sys.stdin.read()
 else:
     prompt = args.prompt
@@ -60,10 +60,9 @@ response = openai.ChatCompletion.create(
     temperature=args.temperature,
 )
 
-generated_text = response.choices[0].message['content'].strip()
-print("Generated Text:")
-print(generated_text)
-
 if args.debug:
     print("\nFull JSON Response:")
     print(json.dumps(response, indent=2))
+
+generated_text = response.choices[0].message['content'].strip()
+print(generated_text)
