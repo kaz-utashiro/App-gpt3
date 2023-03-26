@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+"""
+GPT-3 API Command Line Wrapper
+
+This Python script allows you to easily interact with the GPT-3 API from the command line. 
+You can provide various parameters as command-line options and get the generated text in the output.
+
+Usage:
+    ./gpt3 "your_prompt_here" -e text-davinci-002 -m 50 -t 0.7 --key your_openai_api_key
+
+Options:
+    -e, --engine: The OpenAI GPT-3 engine to use (default: text-davinci-002)
+    -m, --max_tokens: Maximum number of tokens in the response (default: 100)
+    -t, --temperature: Sampling temperature for randomness (default: 0.5)
+    -d, --debug: Show the full response in JSON format (default: False)
+    --key: OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)
+
+Note:
+    To use this script, you need to have the 'openai' library installed. You can install it using pip:
+    pip install openai
+
+    The API key can be provided using the --key option or set as the OPENAI_API_KEY environment variable.
+"""
+import openai
+import argparse
+import os
+import sys
+import json
+
+parser = argparse.ArgumentParser(description="GPT-3 API command line wrapper")
+
+parser.add_argument("prompt", nargs="*", type=str, help="Input prompt for GPT-3")
+parser.add_argument("-e", "--engine", type=str, default="text-davinci-002", help="OpenAI GPT-3 engine (default: text-davinci-002)")
+parser.add_argument("-m", "--max_tokens", type=int, default=100, help="Maximum number of tokens in the response (default: 100)")
+parser.add_argument("-t", "--temperature", type=float, default=0.5, help="Sampling temperature for randomness (default: 0.5)")
+parser.add_argument("--key", type=str, default=None, help="OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)")
+parser.add_argument("-d", "--debug", action="store_true", help="Show the full response in JSON format (default: False)")
+
+args = parser.parse_args()
+
+api_key = args.key or os.environ.get("OPENAI_API_KEY")
+if api_key is None:
+    raise ValueError("Please set the environment variable OPENAI_API_KEY or provide the API key using the --key option.")
+openai.api_key = api_key
+
+if args.prompt[0] == "-":
+    prompt = sys.stdin.read()
+else:
+    prompt = " ".join(args.prompt)
+
+
+response = openai.Completion.create(
+    engine=args.engine,
+    prompt=prompt,
+    max_tokens=args.max_tokens,
+    n=1,
+    stop=None,
+    temperature=args.temperature,
+)
+
+generated_text = response.choices[0].text.strip()
+print("Generated Text:")
+print(generated_text)
+
+if args.debug:
+    print("\nFull JSON Response:")
+    print(json.dumps(response, indent=2))
