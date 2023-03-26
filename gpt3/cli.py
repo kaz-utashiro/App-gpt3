@@ -32,66 +32,69 @@ import os
 import sys
 import json
 
-parser = argparse.ArgumentParser(description="GPT-3 API command line wrapper")
+def cli():
+    parser = argparse.ArgumentParser(description="GPT-3 API command line wrapper")
 
-parser.add_argument("prompts", nargs="*", type=str, help="Input prompts for GPT-3 or '-' to read from stdin")
-parser.add_argument("-e", "--engine", type=str, default="gpt-3.5-turbo", help="OpenAI GPT-3 engine (default: gpt-3.5-turbo)")
-parser.add_argument("-m", "--max-tokens", type=int, default=100, help="Maximum number of tokens in the response (default: 100)")
-parser.add_argument("-t", "--temperature", type=float, default=0.5, help="Sampling temperature for randomness (default: 0.5)")
-parser.add_argument("-d", "--debug", action="store_true", help="Show the request parameters and the full response in JSON format (default: False)")
-parser.add_argument("-k", "--key", type=str, default=None, help="OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)")
+    parser.add_argument("prompts", nargs="*", type=str, help="Input prompts for GPT-3 or '-' to read from stdin")
+    parser.add_argument("-e", "--engine", type=str, default="gpt-3.5-turbo", help="OpenAI GPT-3 engine (default: gpt-3.5-turbo)")
+    parser.add_argument("-m", "--max-tokens", type=int, default=100, help="Maximum number of tokens in the response (default: 100)")
+    parser.add_argument("-t", "--temperature", type=float, default=0.5, help="Sampling temperature for randomness (default: 0.5)")
+    parser.add_argument("-d", "--debug", action="store_true", help="Show the request parameters and the full response in JSON format (default: False)")
+    parser.add_argument("-k", "--key", type=str, default=None, help="OpenAI API key (optional, overrides OPENAI_API_KEY environment variable)")
 
-args = parser.parse_args()
+    args = parser.parse_args()
 
-api_key = args.key or os.environ.get("OPENAI_API_KEY")
-if api_key is None:
-    raise ValueError("Please set the environment variable OPENAI_API_KEY or provide the API key using the --key option.")
-openai.api_key = api_key
+    api_key = args.key or os.environ.get("OPENAI_API_KEY")
+    if api_key is None:
+        raise ValueError("Please set the environment variable OPENAI_API_KEY or provide the API key using the --key option.")
+    openai.api_key = api_key
 
-prompt_parts = []
-for p in args.prompts:
-    if p == "-":
-        prompt_parts.append(sys.stdin.read())
-    else:
-        prompt_parts.append(p)
+    prompt_parts = []
+    for p in args.prompts:
+        if p == "-":
+            prompt_parts.append(sys.stdin.read())
+        else:
+            prompt_parts.append(p)
 
-prompt = "\n".join(prompt_parts)
+    prompt = "\n".join(prompt_parts)
 
-response = openai.ChatCompletion.create(
-    model=args.engine,
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt},
-    ],
-    max_tokens=args.max_tokens,
-    n=1,
-    stop=None,
-    temperature=args.temperature,
-)
+    response = openai.ChatCompletion.create(
+        model=args.engine,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt},
+        ],
+        max_tokens=args.max_tokens,
+        n=1,
+        stop=None,
+        temperature=args.temperature,
+    )
 
-request_params = {
-    "model": args.engine,
-    "messages": [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": prompt},
-    ],
-    "max_tokens": args.max_tokens,
-    "n": 1,
-    "stop": None,
-    "temperature": args.temperature,
-    "timeout": 60,
-}
+    request_params = {
+        "model": args.engine,
+        "messages": [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt},
+        ],
+        "max_tokens": args.max_tokens,
+        "n": 1,
+        "stop": None,
+        "temperature": args.temperature,
+        "timeout": 60,
+    }
 
-if args.debug:
-    print("\nRequest Parameters:")
-    print(json.dumps(request_params, indent=2, ensure_ascii=False))
+    if args.debug:
+        print("\nRequest Parameters:")
+        print(json.dumps(request_params, indent=2, ensure_ascii=False))
 
-response = openai.ChatCompletion.create(**request_params)
+    response = openai.ChatCompletion.create(**request_params)
 
-if args.debug:
-    print("\nFull JSON Response:")
-    print(json.dumps(response, indent=2, ensure_ascii=False))
+    if args.debug:
+        print("\nFull JSON Response:")
+        print(json.dumps(response, indent=2, ensure_ascii=False))
 
-generated_text = response.choices[0].message['content'].strip()
-print(generated_text)
+    generated_text = response.choices[0].message['content'].strip()
+    print(generated_text)
 
+if __name__ == "__main__":
+    cli()
