@@ -17,25 +17,35 @@ gpty [options] [prompts]
 
 ## Options
 
-### -e, --engine
+### -I, --itemize #
+
+与えられた文字列をプロンプトの先頭に入れ、他のプロンプトの前に `- ` を挿入して箇条書きにする。
+例えば、次のように使うことができる。
+`-` は標準入力から読み込まれるが、これについては箇条書きの処理は行われない。
+
+```
+gpty -I '以下の条件にしたがって続く文章を修正しなさい' '小文字を大文字にする' '数字をギリシャ数字にする' -
+```
+
+### -e, --engine #
 
 使用する OpenAI GPT エンジン (default: gpt-3.5-turbo)
 
-### -m, --max-tokens
+### -m, --max-tokens #
 
 レスポンスに含まれる最大トークン数 (default: 100)
 
-### -t, --temperature
+### -t, --temperature #
 
 `temperature` 値 (default: 0.5)
+
+### -k, --key #
+
+OpenAI API キー
 
 ### -d, --debug
 
 リクエストとレスポンスの内容を JSON 形式で表示する (default: False)
-
-### -k, --key
-
-OpenAI API キー
 
 ## Note
 

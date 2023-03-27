@@ -16,25 +16,31 @@ Non-optional arguments are interpreted as GPT input prompts. `-` is read from th
 
 ## Options
 
-### -e, --engine
+### -I, --itemize #
+
+Put the given string at the beginning of the prompt and insert `- ` before other prompts to make them bullet points. For example, you can use the following. The `-` is read from the standard input, but no bullet processing is performed on it.
+
+```` gpty -I 'Correct the following sentences according to the following conditions:' 'Lower case letters should be capitalized' 'Numbers should be Greek numerals' - ````
+
+### -e, --engine #
 
 The OpenAI GPT engine to use (default: gpt-3.5-turbo)
 
-### -m, --max-tokens
+### -m, --max-tokens #
 
 maximum number of tokens in the response (default: 100)
 
-### -t, --temperature
+### -t, --temperature #
 
 The `temperature` value (default: 0.5)
+
+### -k, --key #
+
+OpenAI API keys
 
 ### -d, --debug
 
 Display request and response contents in JSON format (default: False)
-
-### -k, --key
-
-OpenAI API keys
 
 ## Note
 

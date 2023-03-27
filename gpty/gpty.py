@@ -32,10 +32,14 @@ import os
 import sys
 import json
 
+def debug_print(message, file=sys.stderr):
+    print(message, file=file)
+
 def cli():
     parser = argparse.ArgumentParser(description="OpenAI GPT API command line wrapper")
 
     parser.add_argument("prompts", nargs="*", type=str, help="Input prompts for GPT or '-' to read from stdin")
+    parser.add_argument("-I", "--itemize", type=str, help="Itemize other prompts after this string")
     parser.add_argument("-e", "--engine", type=str, default="gpt-3.5-turbo", help="OpenAI GPT engine (default: gpt-3.5-turbo)")
     parser.add_argument("-m", "--max-tokens", type=int, default=2000, help="Maximum number of tokens in the response (default: 100)")
     parser.add_argument("-t", "--temperature", type=float, default=0.5, help="Sampling temperature for randomness (default: 0.5)")
@@ -54,7 +58,13 @@ def cli():
         if p == "-":
             prompt_parts.append(sys.stdin.read())
         else:
-            prompt_parts.append(p)
+            if args.itemize:
+                prompt_parts.append('- ' + p)
+            else:
+                prompt_parts.append(p)
+
+    if args.itemize:
+        prompt_parts.insert(0, args.itemize)
 
     prompt = "\n".join(prompt_parts)
 
@@ -72,14 +82,14 @@ def cli():
     }
 
     if args.debug:
-        print("\nRequest Parameters:")
-        print(json.dumps(request_params, indent=2, ensure_ascii=False))
+        debug_print("\nRequest Parameters:")
+        debug_print(json.dumps(request_params, indent=2, ensure_ascii=False))
 
     response = openai.ChatCompletion.create(**request_params)
 
     if args.debug:
-        print("\nFull JSON Response:")
-        print(json.dumps(response, indent=2, ensure_ascii=False))
+        debug_print("\nFull JSON Response:")
+        debug_print(json.dumps(response, indent=2, ensure_ascii=False))
 
     generated_text = response.choices[0].message['content'].strip()
     print(generated_text)
