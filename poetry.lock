@@ -265,6 +265,21 @@ files = [
 ]
 
 [[package]]
+name = "click-spinner"
+version = "0.1.10"
+description = "Spinner for Click"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "click-spinner-0.1.10.tar.gz", hash = "sha256:87eacf9d7298973a25d7615ef57d4782aebf913a532bba4b28a37e366e975daf"},
+    {file = "click_spinner-0.1.10-py2.py3-none-any.whl", hash = "sha256:d1ffcff1fdad9882396367f15fb957bcf7f5c64ab91927dee2127e0d2991ee84"},
+]
+
+[package.extras]
+test = ["click", "pytest", "six"]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -630,4 +645,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "11f938b3d8cd03464bae257b7e44c86e626a2e020edcd9ee1794a2fa54dd2bde"
+content-hash = "76ee7f66e6e5454a488fd81d2fdcbbbfcab3720de4a5da0a1d69a97e030b0721"

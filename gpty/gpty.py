@@ -31,6 +31,7 @@ import argparse
 import os
 import sys
 import json
+import click_spinner
 
 def debug_print(message, file=sys.stderr):
     print(message, file=file)
@@ -85,7 +86,8 @@ def cli():
         debug_print("\nRequest Parameters:")
         debug_print(json.dumps(request_params, indent=2, ensure_ascii=False))
 
-    response = openai.ChatCompletion.create(**request_params)
+    with click_spinner.spinner():
+        response = openai.ChatCompletion.create(**request_params)
 
     if args.debug:
         debug_print("\nFull JSON Response:")
