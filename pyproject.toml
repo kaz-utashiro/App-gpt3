@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tecolicom-gpty"
+version = "0.1.0"
+description = "OpenAI GPT API Command Line Wrapper"
+authors = ["Kazumasa Utashiro <kaz@utashiro.com>"]
+license = "MIT"
+readme = "README.txt"
+packages = [{include = "gpty"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^0.27.0"
+click = "^7.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+gpty = "gpty.gpty:cli"
