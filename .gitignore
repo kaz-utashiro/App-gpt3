@@ -1,1 +1,3 @@
 dist/
+*~
+*.xlate-*.json
