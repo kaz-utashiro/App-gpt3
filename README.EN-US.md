@@ -18,9 +18,19 @@ Non-optional arguments are interpreted as GPT input prompts. `-` is read from th
 
 ### -I, --itemize #
 
-Put the given string at the beginning of the prompt and insert `- ` before other prompts to make them bullet points. For example, you can use the following. The `-` is read from the standard input, but no bullet processing is performed on it.
+The given string is placed at the beginning of the prompt, and `* ` is inserted before other prompts to make bullets. The `-` is read from the standard input, but no bullet processing is performed on it. For example, you can use the following.
 
-```` gpty -I 'Correct the following sentences according to the following conditions:' 'Lower case letters should be capitalized' 'Numbers should be Greek numerals' - ````
+    gpty -I 'Correct the following text according to these conditions:'
+        'Lower case letters should be capitalized' \
+        'Numbers should be Greek numerals' \
+        -
+
+This is equivalent to instructing the user to
+
+    gpty 'Correct the following sentences according to the following conditions:' \
+        '* Lower case letters should be capitalized' \
+        '* Numbers should be Greek numerals' \
+        -
 
 ### -e, --engine #
 

@@ -19,13 +19,21 @@ gpty [options] [prompts]
 
 ### -I, --itemize #
 
-与えられた文字列をプロンプトの先頭に入れ、他のプロンプトの前に `- ` を挿入して箇条書きにする。
-例えば、次のように使うことができる。
+与えられた文字列をプロンプトの先頭に入れ、他のプロンプトの前に `* ` を挿入して箇条書きにする。
 `-` は標準入力から読み込まれるが、これについては箇条書きの処理は行われない。
+例えば、次のように使うことができる。
 
-```
-gpty -I '以下の条件にしたがって続く文章を修正しなさい' '小文字を大文字にする' '数字をギリシャ数字にする' -
-```
+    gpty -I 'Correct the following text according to these conditions:'
+            'Lower case letters should be capitalized' \
+            'Numbers should be Greek numerals' \
+            -
+
+これは、次のように指示するのと同じである。
+
+    gpty 'Correct the following sentences according to the following conditions:' \
+         '* Lower case letters should be capitalized' \
+         '* Numbers should be Greek numerals' \
+         -
 
 ### -e, --engine #
 
