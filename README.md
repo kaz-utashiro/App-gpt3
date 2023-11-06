@@ -60,6 +60,10 @@ OpenAI API キー
 
 リクエストとレスポンスの内容を JSON 形式で表示する (default: False)
 
+### -v, --version
+
+バージョン番号を表示して終了する
+
 ## NOTE
 
 OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_KEY` として設定する。

@@ -56,6 +56,10 @@ Combine two or more consecutive newline characters into one (default: False)
 
 Display request and response contents in JSON format (default: False)
 
+### -v, --version
+
+Display version number and exit
+
 ## NOTE
 
 The OpenAI API key is set by the `--key` option or the environment variable `OPENAI_API_KEY`.

@@ -15,11 +15,14 @@ import sys
 import re
 import json
 import click_spinner
+from importlib.metadata import version, PackageNotFoundError
 
 def debug_print(message, file=sys.stderr):
     print(message, file=file)
 
 def cli():
+    package_version = version("tecolicom-gpty")
+
     parser = argparse.ArgumentParser(description="OpenAI GPT API command line wrapper")
 
     parser.add_argument("prompts", nargs="*",
@@ -46,6 +49,9 @@ def cli():
     parser.add_argument("-s", "--squeeze",
                         action="store_true",
                         help="Squeeze two or more newlines into one")
+    parser.add_argument("-v", "--version",
+                        action="version",
+                        version=f"%(prog)s {package_version}")
 
     args = parser.parse_args()
 
