@@ -87,7 +87,7 @@ The OpenAI API key is set by the `--key` option or the environment variable `OPE
 ## INSTALL
 
 ```
-pip install git+https://github.com/kaz-utashiro/App-gpty.git
+pip install git+https://github.com/tecolicom/App-gpty.git
 ```
 
 ## AUTHOR

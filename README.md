@@ -91,7 +91,7 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
 ## INSTALL
 
 ```
-pip install git+https://github.com/kaz-utashiro/App-gpty.git
+pip install git+https://github.com/tecolicom/App-gpty.git
 ```
 
 ## AUTHOR
