@@ -80,6 +80,12 @@ The OpenAI API key is set by the `--key` option or the environment variable `OPE
   - Installed but did not work with error
   - At first I was going to name it gptee, but when I looked for it, I found it and decided to use a different name.
 
+## INSTALL
+
+```
+pip install git+https://github.com/kaz-utashiro/App-gpty.git
+```
+
 ## AUTHOR
 
 Kazumasa Utashiro

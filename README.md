@@ -84,6 +84,12 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
   - インストールしたがエラーで動かない
   - 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
 
+## INSTALL
+
+```
+pip install git+https://github.com/kaz-utashiro/App-gpty.git
+```
+
 ## AUTHOR
 
 Kazumasa Utashiro
