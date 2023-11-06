@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tecolicom-gpty"
-version = "0.1.0"
+version = "0.2.0"
 description = "OpenAI GPT API Command Line Wrapper"
 authors = ["Kazumasa Utashiro <kaz@utashiro.com>"]
 license = "MIT"
