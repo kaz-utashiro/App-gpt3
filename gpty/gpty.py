@@ -12,6 +12,7 @@ import openai
 import argparse
 import os
 import sys
+import re
 import json
 import click_spinner
 
@@ -39,8 +40,12 @@ def cli():
     parser.add_argument("-d", "--debug",
                         action="store_true",
                         help="Show the request and response in JSON (default: False)")
-    parser.add_argument("-k", "--key", type=str, default=None,
+    parser.add_argument("-k", "--key",
+                        type=str, default=None,
                         help="OpenAI API key")
+    parser.add_argument("-s", "--squeeze",
+                        action="store_true",
+                        help="Squeeze two or more newlines into one")
 
     args = parser.parse_args()
 
@@ -89,6 +94,10 @@ def cli():
         debug_print(json.dumps(response, indent=2, ensure_ascii=False))
 
     generated_text = response.choices[0].message['content'].strip()
+
+    if args.squeeze:
+        generated_text = re.sub(r'\n\n+', '\n', generated_text)
+
     print(generated_text)
 
 if __name__ == "__main__":

@@ -1,20 +1,18 @@
-# OpenAI GPT API Command Line Wrapper
+# OpenAI API Command Line Wrapper
 
 GPT API を操作するためのシンプルなコマンドラインインタフェース
 
-## Usage:
+## USAGE
 
-gpty [options] [prompts]
+gpty [options] prompts
 
-## Arguments
-
-### Prompt
+## PROMPTS
 
 オプション以外の引数は GPT の入力プロンプトとして解釈される。
 引数が `-` だった場合、標準入力から読み込まれる。
 各プロンプトは、改行文字で連結されて API に送られる。
 
-## Options
+## OPTIONS
 
 ### -I, --itemize *message*
 
@@ -22,14 +20,14 @@ gpty [options] [prompts]
 `-` は標準入力から読み込まれるが、これについては箇条書きの処理は行われない。
 例えば、次のように使うことができる。
 
-    gpty -I 'Correct the following text according to the next conditions:'
+    gpty -I 'Correct the following text according to the next conditions:' \
             'Lower case letters should be capitalized' \
             'Numbers should be Greek numerals' \
             - < data.txt
 
 これは、次のように指示するのと同じである。
 
-    gpty 'Correct the following text according to the next conditions:'
+    gpty 'Correct the following text according to the next conditions:' \
          '* Lower case letters should be capitalized' \
          '* Numbers should be Greek numerals' \
          - < data.txt
@@ -54,17 +52,21 @@ gpty [options] [prompts]
 
 OpenAI API キー
 
+### -s, --squeeze
+
+2文字以上連続する改行文字を1つにまとめる (default: False)
+
 ### -d, --debug
 
 リクエストとレスポンスの内容を JSON 形式で表示する (default: False)
 
-## Note
+## NOTE
 
 OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_KEY` として設定する。
 
-## Other Toos:
+## OTHER TOOS
 
-- shell_gpt
+### shell_gpt
   - https://github.com/TheR1D/shell_gpt
   - `sgtp` コマンドとして使える
   - `-s` オプションが便利
@@ -72,25 +74,25 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
   - 優れたツールなので、これで困らなければぜひ使うべき
   - プロンプトを標準入力から与えられないため、使い勝手が悪いことがある
 
-- gpt3
+### gpt3
   - https://github.com/CrazyPython/gpt3-cli
   - curl を呼び出すシンプルなシェルスクリプト
 
-- gptee
+### gptee
   - https://github.com/zurawiki/gptee
   - RUST で書かれた cli ツール
   - インストールしたがエラーで動かない
   - 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
 
-### AUTHOR
+## AUTHOR
 
 Kazumasa Utashiro
 
-### LICENSE
+## LICENSE
 
 MIT
 
-### COPYRIGHT
+## COPYRIGHT
 
 The following copyright notice applies to all the files provided in
 this distribution, including binary files, unless explicitly noted
