@@ -8,14 +8,14 @@ gpty [prompts] [options]
 
 """
 
-import openai
+from importlib.metadata import version
 import argparse
 import os
 import sys
 import re
 import json
 import click_spinner
-from importlib.metadata import version, PackageNotFoundError
+import openai
 
 def debug_print(message, file=sys.stderr):
     print(message, file=file)
@@ -27,37 +27,41 @@ def cli():
 
     parser.add_argument("prompts", nargs="*",
                         type=str,
-                        help="Input prompts for GPT or '-' to read from stdin")
+                        help="input prompts for GPT or '-' to read from stdin")
     parser.add_argument("-I", "--itemize",
                         type=str, metavar="MESSAGE",
-                        help="Itemize other prompts after this message")
+                        help="itemize other prompts after this message")
     parser.add_argument("-e", "--engine",
                         type=str, default="gpt-3.5-turbo",
                         help="OpenAI GPT engine (default: gpt-3.5-turbo)")
     parser.add_argument("-m", "--max-tokens",
                         type=int, default=2000,
-                        help="Maximum number of tokens in the response (default: 2000)")
+                        help="maximum number of tokens in the response (default: 2000)")
     parser.add_argument("-t", "--temperature",
                         type=float, default=0.5,
-                        help="Sampling temperature for randomness (default: 0.5)")
+                        help="sampling temperature for randomness (default: 0.5)")
     parser.add_argument("-d", "--debug",
                         action="store_true",
-                        help="Show the request and response in JSON (default: False)")
+                        help="show the request and response in JSON (default: False)")
     parser.add_argument("-k", "--key",
                         type=str, default=None,
                         help="OpenAI API key")
-    parser.add_argument("-s", "--squeeze",
+    parser.add_argument("-q", "--squeeze",
                         action="store_true",
-                        help="Squeeze two or more newlines into one")
+                        help="squeeze two or more newlines into one")
     parser.add_argument("-v", "--version",
                         action="version",
                         version=f"%(prog)s {package_version}")
+    parser.add_argument("-s", "--system",
+                        action="append",
+                        type=str, metavar="MESSAGE",
+                        help="set system message (can be used multiple times)")
 
     args = parser.parse_args()
 
     api_key = args.key or os.environ.get("OPENAI_API_KEY")
     if api_key is None:
-        raise ValueError("Please set the environment variable OPENAI_API_KEY or provide the API key using the --key option.")
+        raise ValueError("Set OPENAI_API_KEY or use --key option.")
     openai.api_key = api_key
 
     prompt_parts = []
@@ -75,12 +79,17 @@ def cli():
 
     prompt = "\n".join(prompt_parts)
 
+    if args.system:
+        messages = [ {"role": "system", "content": sys_message} for sys_message in args.system ]
+    else:
+        messages = [
+            {"role": "system", "content": "You are a helpful assistant."},
+        ]
+    messages.append({"role": "user", "content": prompt})
+
     request_params = {
         "model": args.engine,
-        "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt},
-        ],
+        "messages": messages,
         "max_tokens": args.max_tokens,
         "n": 1,
         "stop": None,

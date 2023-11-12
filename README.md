@@ -14,6 +14,11 @@ gpty [options] prompts
 
 ## OPTIONS
 
+### -s, --system *message*
+
+システムメッセージを指定する。
+繰り返すことで、複数のメッセージを指定することが可能。
+
 ### -I, --itemize *message*
 
 与えられたメッセージをプロンプトの先頭に置き、他のプロンプトは先頭に `* ` を挿入して箇条書きにする。
@@ -52,7 +57,7 @@ gpty [options] prompts
 
 OpenAI API キー
 
-### -s, --squeeze
+### -q, --squeeze
 
 2文字以上連続する改行文字を1つにまとめる (default: False)
 
@@ -93,6 +98,12 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
 ```
 pip install git+https://github.com/tecolicom/App-gpty.git
 ```
+
+=head1 SEE ALSO
+
+L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>
+
+L<https://github.com/openai/openai-python>
 
 ## AUTHOR
 
