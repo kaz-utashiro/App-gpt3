@@ -20,54 +20,76 @@ import openai
 def debug_print(message, file=sys.stderr):
     print(message, file=file)
 
-def create_parser(package_version):
+package_name = "tecolicom-gpty"
 
+def create_parser():
+
+    def args(**kwargs): return kwargs
     spec = [
         (("prompts",),
-         {"nargs": "*", "type": str, 
-          "help": "input prompts for GPT or '-' to read from stdin"}),
-        (("-I", "--itemize",),
-         {"type": str, "metavar": "MESSAGE", 
-          "help": "itemize other prompts after this message"}),
-        (("-e", "--engine",),
-         {"type": str, "default": "gpt-3.5-turbo",
-          "help": "OpenAI GPT engine (default: gpt-3.5-turbo)"}),
-        (("-m", "--max-tokens",),
-         {"type": int, "default": 2000, 
-          "help": "maximum number of tokens in the response (default: 2000)"}),
-        (("-t", "--temperature",),
-         {"type": float, "default": 0.5, 
-          "help": "sampling temperature for randomness (default: 0.5)"}),
-        (("-d", "--debug",),
-         {"action": "store_true", 
-          "help": "show the request and response in JSON (default: False)"}),
-        (("-k", "--key",),
-         {"type": str, "default": None, 
-          "help": "OpenAI API key"}),
-        (("-q", "--squeeze",),
-         {"action": "store_true", 
-          "help": "squeeze two or more newlines into one"}),
-        (("-v", "--version",),
-         {"action": "version", 
-          "version": f"%(prog)s {package_version}"}),
+         "input prompts for GPT or '-' to read from stdin", args(
+             nargs   = "*",
+             type    = str,
+         )),
         (("-s", "--system",),
-         {"action": "append", "type": str, "metavar": "MESSAGE", 
-          "help": "set system message (can be used multiple times)"}),
+         "set system message (can be used multiple times)", args(
+             action  = "append",
+             type    = str,
+             metavar = "MESSAGE",
+         )),
+        (("-I", "--itemize",),
+         "itemize other prompts after this message", args(
+             type    = str,
+             metavar = "MESSAGE",
+         )),
+        (("-e", "--engine",),
+         "OpenAI GPT engine", args(
+             type    = str,
+             default = "gpt-3.5-turbo",
+         )),
+        (("-m", "--max-tokens",),
+         "maximum number of tokens in the response", args(
+             type    = int,
+             default = 2000,
+         )),
+        (("-t", "--temperature",),
+         "sampling temperature for randomness", args(
+             type    = float,
+             default = 0.5,
+         )),
+        (("-k", "--key",),
+         "OpenAI API key", args(
+             type    = str,
+         )),
+        (("-q", "--squeeze",),
+         "squeeze two or more newlines into one", args(
+             action  = "store_true",
+         )),
+        (("-d", "--debug",),
+         "show the request and response in JSON", args(
+             action  = "store_true",
+         )),
+        (("-v", "--version",),
+         "show version", args(
+             action  = "version",
+             version = f"%(prog)s {version(package_name)}",
+         )),
     ]
 
-    parser = argparse.ArgumentParser(description="OpenAI GPT API command line wrapper")
+    parser = argparse.ArgumentParser(
+        description="OpenAI GPT API command line wrapper",
+    )
 
-    for args, kwargs in spec:
-        parser.add_argument(*args, **kwargs)
+    for args, help_message, kwargs in spec:
+        if "default" in kwargs:
+            help_message += f" (default: {kwargs['default']})"
+        parser.add_argument(*args, help=help_message, **kwargs)
 
     return parser
 
 def cli():
 
-    package_version = version("tecolicom-gpty")
-
-    parser = create_parser(package_version)
-
+    parser = create_parser()
     args = parser.parse_args()
 
     api_key = args.key or os.environ.get("OPENAI_API_KEY")
