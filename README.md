@@ -45,6 +45,15 @@ gpty [options] prompts
 
 使用する OpenAI GPT エンジン (default: gpt-3.5-turbo)
 
+### -e, --engine *alias*
+
+エンジン名には、以下の別名が定義されている:
+
+    3: gpt-3.5-turbo
+	4: gpt-4
+
+これらは `-e3`、`-e4` のように使うことができる。
+
 ### -m, --max-tokens *number*
 
 レスポンスに含まれる最大トークン数 (default: 2000)
@@ -92,6 +101,7 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
   - RUST で書かれた cli ツール
   - インストールしたがエラーで動かない
   - 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
+  - 2023.11 月に最新版をインストールしたら動いた
 
 ## INSTALL
 
@@ -99,7 +109,7 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
 pip install git+https://github.com/tecolicom/App-gpty.git
 ```
 
-=head1 SEE ALSO
+## SEE ALSO
 
 L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>
 

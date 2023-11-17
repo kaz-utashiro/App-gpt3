@@ -16,6 +16,7 @@ import re
 import json
 from importlib.metadata import version
 import click_spinner
+import pprint
 import openai
 
 app = typer.Typer(add_completion=False)
@@ -30,6 +31,11 @@ def vers(ctx: typer.Context, value: bool):
         return
     typer.echo(f"{ctx.info_name} {version(package_name)}")
     raise typer.Exit()
+
+aliases = {
+    "3": "gpt-3.5-turbo",
+    "4": "gpt-4",
+}
 
 @app.command()
 def main(
@@ -51,6 +57,9 @@ def main(
     if api_key is None:
         raise typer.Exit("Set OPENAI_API_KEY or use --key option.")
     openai.api_key = api_key
+
+    while engine in aliases:
+        engine = aliases[engine]
 
     prompt_parts = []
     for p in prompts:
