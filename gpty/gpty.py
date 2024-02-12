@@ -17,7 +17,7 @@ import json
 from importlib.metadata import version
 import click_spinner
 import pprint
-import openai
+from openai import OpenAI
 
 app = typer.Typer(add_completion=False)
 
@@ -56,7 +56,11 @@ def main(
     api_key = key or os.environ.get("OPENAI_API_KEY")
     if api_key is None:
         raise typer.Exit("Set OPENAI_API_KEY or use --key option.")
-    openai.api_key = api_key
+
+    client = OpenAI(
+        # This is the default and can be omitted
+        api_key = os.environ.get("OPENAI_API_KEY"),
+    )
 
     while engine in aliases:
         engine = aliases[engine]
@@ -97,13 +101,12 @@ def main(
         debug_print(json.dumps(request_params, indent=2, ensure_ascii=False))
 
     with click_spinner.spinner():
-        response = openai.ChatCompletion.create(**request_params)
+        response = client.chat.completions.create(**request_params)
 
     if debug:
-        debug_print("\nFull JSON Response:")
-        debug_print(json.dumps(response, indent=2, ensure_ascii=False))
+        pprint.pprint(response, indent=2)
 
-    generated_text = response.choices[0].message['content'].strip()
+    generated_text = response.choices[0].message.content
 
     if squeeze:
         generated_text = re.sub(r'\n\n+', '\n', generated_text)
