@@ -103,6 +103,11 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
   - 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
   - 2023.11 月に最新版をインストールしたら動いた
 
+### llm
+  - https://llm.datasette.io/en/stable/
+  - https://github.com/simonw/llm
+  - `llm prompt -s system-prompt < prompt-text` のように使えるのでこれでいいかも
+
 ## INSTALL
 
 ```
