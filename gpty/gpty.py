@@ -34,7 +34,7 @@ def vers(ctx: typer.Context, value: bool):
 
 aliases = {
     "3": "gpt-3.5-turbo",
-    "4": "gpt-4",
+    "4": "gpt-4-1106-preview",
 }
 
 @app.command()
