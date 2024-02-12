@@ -22,17 +22,11 @@ gpty [options] prompts
 
 주어진 메시지를 프롬프트의 맨 앞에 배치하고, 다른 프롬프트는 앞에 `*`를 삽입하여 글머리 기호로 만든다. `-`는 표준 입력에서 읽혀지지만, 이에 대해서는 글머리 기호 처리가 이루어지지 않는다. 예를 들어, 다음과 같이 사용할 수 있다.
 
-    gpty -I 'Correct the following text according to the following conditions:' \ 'Correct the following text according to the following conditions:' \
-            'Lower case letters should be capitalized' \
-            'Numbers should be Greek numbers' \
-            - < data.txt
+gpty -I '다음 조건에 따라 다음 텍스트를 수정합니다:' \ '소문자는 대문자로' \ '숫자는 그리스 숫자로' \ '다음 조건에 따라 다음 텍스트를 수정합니다' \ '소문자는 대문자로' \ '숫자는 그리스 숫자이어야 합니다. - < data.txt
 
 이것은 다음과 같이 지시하는 것과 같다.
 
-    gpty 'Correct the following text according to the following conditions:' \ '* 소문자는 대문자로 해야 한다.
-         '* 소문자는 대문자로 표기해야 한다' \
-         '* Numbers should be Greek numerals' \
-         - < data.txt
+gpty '다음 조건에 따라 다음 텍스트를 수정한다:' \ '* 소문자는 대문자로 표기해야 한다' \ '* 숫자는 그리스 숫자로 표기해야 한다' \ - < data.txt
 
 별 차이가 없어 보이지만, 일본어는 프롬프트 문구 안에 공백이 포함되지 않기 때문에 따옴표를 사용할 필요가 없어 명령줄에서 입력하기 쉽다.
 
@@ -44,8 +38,7 @@ gpty [options] prompts
 
 엔진 이름에는 다음과 같은 별칭이 정의되어 있다.
 
-    3: gpt-3.5-turbo
-	4: gpt-4
+3: gpt-3.5-turbo 4: gpt-4
 
 이들은 `-e3`, `-e4`와 같이 사용할 수 있다.
 
@@ -79,33 +72,19 @@ OpenAI의 API 키는 `--key` 옵션 또는 환경 변수 `OPENAI_API_KEY`로 설
 
 ## OTHER TOOS
 
-### shell_gpt
-  - https://github.com/TheR1D/shell_gpt
-  - sgtp` 명령어로 사용할 수 있다.
-  - s` 옵션이 편리하다.
-  - 결과를 캐시해 주기 때문에 반복적으로 실행할 때 편리하다.
-  - 훌륭한 도구이므로, 이 정도면 괜찮다면 꼭 사용해야 한다.
-  - 표준 입력에서 프롬프트를 제공하지 않기 때문에 사용이 불편할 수 있다.
+### shell_gpt - https://github.com/TheR1D/shell_gpt - `sgtp` 명령어로 사용 가능 - `-s` 옵션이 편리함 - 결과를 캐싱해 주기 때문에 반복 실행에 편리함 - 훌륭한 도구이므로, 이것으로 문제가 없다면 꼭! 사용해야 할 것 - 표준 입력에서 프롬프트를 제공하지 않기 때문에 사용성이 떨어질 수 있다.
 
-### gpt3
-  - https://github.com/CrazyPython/gpt3-cli
-  - curl을 호출하는 간단한 쉘 스크립트
+### gpt3 - https://github.com/CrazyPython/gpt3-cli - curl을 호출하는 간단한 셸 스크립트
 
-### gptee
-  - https://github.com/zurawiki/gptee
-  - RUST로 작성된 cli 도구
-  - 설치했지만 오류로 작동하지 않는다.
-  - 처음에는 gptee라는 이름으로 하려고 했는데, 검색해보니 다른 이름이 있어서 다른 이름으로 변경했다.
-  - 2023.11 월에 최신 버전을 설치하니 작동했다.
+### gptee - https://github.com/zurawiki/gptee - RUST로 작성된 cli 도구 - 설치했으나 오류로 작동하지 않음 - 처음엔 gptee라는 이름으로 하려고 했는데, 찾아보니 있어서 다른 이름으로 변경 - 2023.11월에 최신 버전을 설치하니 동작함 - 2023.11에 최신 버전을
 
-### llm
-  - https://llm.datasette.io/en/stable/
-  - https://github.com/simonw/llm
-  - llm prompt -s system-prompt < prompt-text`처럼 사용할 수 있으니 이 정도면 괜찮을 것 같다.
+### llm - https://llm.datasette.io/en/stable/ - https://github.com/simonw/llm - `llm prompt -s system-prompt < prompt-text`처럼 사용할 수 있으므로 이것도 괜찮을 것 같다.
 
 ## INSTALL
 
-``` pip install git+https://github.com/tecolicom/App-gpty.git ``` ```
+```
+pip install git+https://github.com/tecolicom/App-gpty.git
+```
 
 ## SEE ALSO
 
@@ -123,6 +102,8 @@ MIT
 
 ## COPYRIGHT
 
-본 배포판에서 제공되는 모든 파일(바이너리 파일 포함)은 별도의 명시적인 언급이 없는 한 다음 저작권 고지가 적용됩니다.
+The following copyright notice applies to all the files provided in
+this distribution, including binary files, unless explicitly noted
+otherwise.
 
 Copyright © Kazumasa Utashiro
