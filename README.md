@@ -116,9 +116,15 @@ pip install git+https://github.com/tecolicom/App-gpty.git
 
 ## SEE ALSO
 
-L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>
+### App::Greple::xlate
+  - https://metacpan.org/dist/App-Greple-xlate
+  - https://github.com/kaz-utashiro/App-Greple-xlate
 
-L<https://github.com/openai/openai-python>
+### App::gpty
+  - https://github.com/tecolicom/App-gpty
+
+### openai-python
+  - https://github.com/openai/openai-python
 
 ## AUTHOR
 
@@ -134,4 +140,4 @@ The following copyright notice applies to all the files provided in
 this distribution, including binary files, unless explicitly noted
 otherwise.
 
-Copyright © Kazumasa Utashiro
+Copyright © 2023-2024 Kazumasa Utashiro

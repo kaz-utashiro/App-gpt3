@@ -22,23 +22,23 @@ Specifies a system message. Multiple messages can be specified by repeating.
 
 Put the given message at the top of the prompt, and bullet other prompts by inserting `* ` at the top. The `-` is read from standard input, but no bullet processing is performed on it. For example, you can use
 
-gpty -I 'Correct the following text according to the next conditions:' \ 'Lower case letters should be capitalized' \ 'Numbers should be Greek numerals' - < data.txt
+    gpty -I 'Correct the following text according to the next conditions:' \ 'Lower case letters should be capitalized' \ 'Numbers should be Greek numerals' - < data.txt
 
 This is equivalent to the following instruction
 
-gpty 'Correct the following text according to the next conditions:' \ '* Lower case letters should be capitalized' \ '* Numbers should be Greek numerals' \ - < data.txt
+    gpty 'Correct the following text according to the next conditions:' \ '* Lower case letters should be capitalized' \ '* Numbers should be Greek numerals' \ - < data.txt
 
 It may not seem like much of a difference, but in Japanese, the prompt phrase does not include spaces, so it is easier to type from the command line without the need to use quotation marks.
 
 ### -e, --engine *name*.
 
-OpenAI GPT engine to use (default: gpt-3.5-turbo)
+使用する OpenAI GPT エンジン (default: gpt-4o-mini)
 
 ### -e, --engine *alias*
 
 The following aliases are defined for the engine name: ### -e, --engine *alias
 
-3: gpt-3.5-turbo 4: gpt-4
+    3: gpt-3.5-turbo 4: gpt-4o-mini
 
 These can be used like `-e3` and `-e4`.
 
@@ -88,9 +88,15 @@ pip install git+https://github.com/tecolicom/App-gpty.git
 
 ## SEE ALSO
 
-L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>
+### App::Greple::xlate
+  - https://metacpan.org/dist/App-Greple-xlate
+  - https://github.com/kaz-utashiro/App-Greple-xlate
 
-L<https://github.com/openai/openai-python>
+### App::gpty
+  - https://github.com/tecolicom/App-gpty
+
+### openai-python
+  - https://github.com/openai/openai-python
 
 ## AUTHOR
 
@@ -106,4 +112,4 @@ The following copyright notice applies to all the files provided in
 this distribution, including binary files, unless explicitly noted
 otherwise.
 
-Copyright © Kazumasa Utashiro
+Copyright © 2023-2024 Kazumasa Utashiro

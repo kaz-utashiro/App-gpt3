@@ -1,14 +1,14 @@
 LANGS  := EN-US KO ZH
 MDS    := $(LANGS:%=README.%.md)
-IGNORE := VERSION AUTHOR LICENSE COPYRIGHT INSTALL
+IGNORE := VERSION AUTHOR LICENSE COPYRIGHT INSTALL SEE.ALSO
 
 all: $(MDS)
 
-XLATE := xlate
+XLATE := xlate -a
 
 ifdef IGNORE
 $(foreach ignore,$(IGNORE),$(eval \
-  GREPLEOPT += --exclude '^\#+[ ]*(?i:$(ignore))\b(?s:.*?)(?=^\#|\z)' \
+  GREPLEOPT += --exclude '^(\#+)[ ]*(?i:$(ignore))\b(?s:.*?)\n(?=\g{1}[^\#]|\z)' \
 ))
 endif
 

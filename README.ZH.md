@@ -22,23 +22,23 @@ gpty [options] 提示。
 
 将给定的信息放在提示符的顶部，而其他提示符则通过在顶部插入 `* ` 来分项。 从标准输入中读取 `-`，但不对其进行弹出处理。例如，你可以使用
 
-gpty -I '根据以下条件更正以下文本：' \ '小写字母应大写' \ '数字应为希腊字母- < data.txt
+    gpty -I '根据以下条件更正以下文本：' \ '小写字母应大写' \ '数字应为希腊字母- < data.txt
 
 这相当于指令如下。
 
-gpty '根据以下条件更正以下文本：' （* 小写字母应大写） （* 数字应为希腊数字- < data.txt
+    gpty '根据以下条件更正以下文本：' （* 小写字母应大写） （* 数字应为希腊数字- < data.txt
 
 看似差别不大，但在日语中，提示短语不包含空格，因此从命令行键入更方便，无需使用引号。
 
 ### -e, --engine *name*.
 
-要使用的 OpenAI GPT 引擎（默认：gpt-3.5-turbo）
+使用的 OpenAI GPT 引擎（默认：gpt-4o-mini）
 
 ### -e, --engine *alias*.
 
 为引擎名称定义了以下别名： ### -e, --engine *alias
 
-3: gpt-3.5-turbo 4: gpt-4
+    3: gpt-3.5-turbo 4: gpt-4o-mini
 
 这些别名可用作 `-e3`、`-e4`。
 
@@ -86,11 +86,17 @@ OpenAI API 密钥由 `--key` 选项或环境变量 `OPENAI_API_KEY` 设置。
 pip install git+https://github.com/tecolicom/App-gpty.git
 ```
 
-## SEE ALSO.
+## SEE ALSO
 
-L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>
+### App::Greple::xlate
+  - https://metacpan.org/dist/App-Greple-xlate
+  - https://github.com/kaz-utashiro/App-Greple-xlate
 
-L<https://github.com/openai/openai-python
+### App::gpty
+  - https://github.com/tecolicom/App-gpty
+
+### openai-python
+  - https://github.com/openai/openai-python
 
 ## AUTHOR
 
@@ -106,4 +112,4 @@ The following copyright notice applies to all the files provided in
 this distribution, including binary files, unless explicitly noted
 otherwise.
 
-Copyright © Kazumasa Utashiro
+Copyright © 2023-2024 Kazumasa Utashiro

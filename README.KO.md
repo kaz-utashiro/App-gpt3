@@ -22,23 +22,23 @@ gpty [options] prompts
 
 주어진 메시지를 프롬프트의 맨 앞에 배치하고, 다른 프롬프트는 앞에 `*`를 삽입하여 글머리 기호로 만든다. `-`는 표준 입력에서 읽혀지지만, 이에 대해서는 글머리 기호 처리가 이루어지지 않는다. 예를 들어, 다음과 같이 사용할 수 있다.
 
-gpty -I '다음 조건에 따라 다음 텍스트를 수정합니다:' \ '소문자는 대문자로' \ '숫자는 그리스 숫자로' \ '다음 조건에 따라 다음 텍스트를 수정합니다' \ '소문자는 대문자로' \ '숫자는 그리스 숫자이어야 합니다. - < data.txt
+    gpty -I '다음 조건에 따라 다음 텍스트를 수정합니다:' \ '소문자는 대문자로' \ '숫자는 그리스 숫자로' \ '다음 조건에 따라 다음 텍스트를 수정합니다' \ '소문자는 대문자로' \ '숫자는 그리스 숫자이어야 합니다. - < data.txt
 
 이것은 다음과 같이 지시하는 것과 같다.
 
-gpty '다음 조건에 따라 다음 텍스트를 수정한다:' \ '* 소문자는 대문자로 표기해야 한다' \ '* 숫자는 그리스 숫자로 표기해야 한다' \ - < data.txt
+    gpty '다음 조건에 따라 다음 텍스트를 수정한다:' \ '* 소문자는 대문자로 표기해야 한다' \ '* 숫자는 그리스 숫자로 표기해야 한다' \ - < data.txt
 
 별 차이가 없어 보이지만, 일본어는 프롬프트 문구 안에 공백이 포함되지 않기 때문에 따옴표를 사용할 필요가 없어 명령줄에서 입력하기 쉽다.
 
 ### -e, --engine *name*
 
-사용할 OpenAI GPT 엔진 (default: gpt-3.5-turbo)
+使用する OpenAI GPT エンジン (default: gpt-4o-mini)
 
 ### -e, --engine *alias*
 
 엔진 이름에는 다음과 같은 별칭이 정의되어 있다.
 
-3: gpt-3.5-turbo 4: gpt-4
+    3: gpt-3.5-turbo 4: gpt-4o-mini
 
 이들은 `-e3`, `-e4`와 같이 사용할 수 있다.
 
@@ -88,9 +88,15 @@ pip install git+https://github.com/tecolicom/App-gpty.git
 
 ## SEE ALSO
 
-L<App::Greple::xlate>, L<App::Greple::xlate::gpt3>, L<App::Greple::xlate::gpt2>, L<App::Greple::gpt3> ## 참고
+### App::Greple::xlate
+  - https://metacpan.org/dist/App-Greple-xlate
+  - https://github.com/kaz-utashiro/App-Greple-xlate
 
-L<https://github.com/openai/openai-python>
+### App::gpty
+  - https://github.com/tecolicom/App-gpty
+
+### openai-python
+  - https://github.com/openai/openai-python
 
 ## AUTHOR
 
@@ -106,4 +112,4 @@ The following copyright notice applies to all the files provided in
 this distribution, including binary files, unless explicitly noted
 otherwise.
 
-Copyright © Kazumasa Utashiro
+Copyright © 2023-2024 Kazumasa Utashiro
