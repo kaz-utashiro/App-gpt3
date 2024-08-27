@@ -85,28 +85,32 @@ OpenAI の API キーは `--key` オプションか、環境変数 `OPENAI_API_K
 ## OTHER TOOS
 
 ### shell_gpt
-  - https://github.com/TheR1D/shell_gpt
-  - `sgtp` コマンドとして使える
-  - `-s` オプションが便利
-  - 結果をキャッシュしてくれるので、繰り返し実行するのに便利
-  - 優れたツールなので、これで困らなければぜひ使うべき
-  - プロンプトを標準入力から与えられないため、使い勝手が悪いことがある
+
+- https://github.com/TheR1D/shell_gpt
+- `sgtp` コマンドとして使える
+- `-s` オプションが便利
+- 結果をキャッシュしてくれるので、繰り返し実行するのに便利
+- 優れたツールなので、これで困らなければぜひ使うべき
+- プロンプトを標準入力から与えられないため、使い勝手が悪いことがある
 
 ### gpt3
-  - https://github.com/CrazyPython/gpt3-cli
-  - curl を呼び出すシンプルなシェルスクリプト
+
+- https://github.com/CrazyPython/gpt3-cli
+- curl を呼び出すシンプルなシェルスクリプト
 
 ### gptee
-  - https://github.com/zurawiki/gptee
-  - RUST で書かれた cli ツール
-  - インストールしたがエラーで動かない
-  - 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
-  - 2023.11 月に最新版をインストールしたら動いた
+
+- https://github.com/zurawiki/gptee
+- RUST で書かれた cli ツール
+- インストールしたがエラーで動かない
+- 最初 gptee という名前にしようかと思ったが、探したらあったので別の名前にした
+- 2023.11 月に最新版をインストールしたら動いた
 
 ### llm
-  - https://llm.datasette.io/en/stable/
-  - https://github.com/simonw/llm
-  - `llm prompt -s system-prompt < prompt-text` のように使えるのでこれでいいかも
+
+- https://llm.datasette.io/en/stable/
+- https://github.com/simonw/llm
+- `llm prompt -s system-prompt < prompt-text` のように使えるのでこれでいいかも
 
 ## INSTALL
 
@@ -117,14 +121,17 @@ pip install git+https://github.com/tecolicom/App-gpty.git
 ## SEE ALSO
 
 ### App::Greple::xlate
-  - https://metacpan.org/dist/App-Greple-xlate
-  - https://github.com/kaz-utashiro/App-Greple-xlate
+
+- https://metacpan.org/dist/App-Greple-xlate
+- https://github.com/kaz-utashiro/App-Greple-xlate
 
 ### App::gpty
-  - https://github.com/tecolicom/App-gpty
+
+- https://github.com/tecolicom/App-gpty
 
 ### openai-python
-  - https://github.com/openai/openai-python
+
+- https://github.com/openai/openai-python
 
 ## AUTHOR
 

@@ -22,11 +22,17 @@ gpty [options] 提示。
 
 将给定的信息放在提示符的顶部，而其他提示符则通过在顶部插入 `* ` 来分项。 从标准输入中读取 `-`，但不对其进行弹出处理。例如，你可以使用
 
-    gpty -I '根据以下条件更正以下文本：' \ '小写字母应大写' \ '数字应为希腊字母- < data.txt
+    gpty -I '根据以下条件更正以下文本：' \
+            小写字母应大写' \
+            数字应为希腊数字
+            - < data.txt
 
 这相当于指令如下。
 
-    gpty '根据以下条件更正以下文本：' （* 小写字母应大写） （* 数字应为希腊数字- < data.txt
+    gpty '根据下一个条件更正以下文本：' （'* 小写字母应大写
+         小写字母应大写
+         数字应为希腊字母
+         - < data.txt
 
 看似差别不大，但在日语中，提示短语不包含空格，因此从命令行键入更方便，无需使用引号。
 
@@ -38,7 +44,8 @@ gpty [options] 提示。
 
 为引擎名称定义了以下别名： ### -e, --engine *alias
 
-    3: gpt-3.5-turbo 4: gpt-4o-mini
+    3: gpt-3.5-turbo
+    4: GPT-4O-MINI
 
 这些别名可用作 `-e3`、`-e4`。
 
@@ -72,13 +79,33 @@ OpenAI API 密钥由 `--key` 选项或环境变量 `OPENAI_API_KEY` 设置。
 
 ## 其他操作系统。
 
-#### shell_gpt - https://github.com/TheR1D/shell_gpt - 可作为 `sgtp` 命令使用 - `-s` 选项很有用 - 缓存结果，因此对重复运行很有用 - 出色的工具，因此如果你在使用它时没有遇到困难，请应该使用 - 提示不能从 stdin 中发出，所以使用起来可能会很麻烦。
+### shell_gpt
 
-### gpt3 - https://github.com/CrazyPython/gpt3-cli - 调用 curl 的简单 shell 脚本
+- https://github.com/TheR1D/shell_gpt
+- 可用作 `sgtp` 命令。
+- s "选项很有用。
+- 对重复运行很有用，因为它会缓存结果
+- 这是一个非常好的工具，如果使用起来没有问题，就一定要使用它！
+- 由于不能从 stdin 中发出提示，因此使用起来可能比较麻烦
 
-### gptee - https://github.com/zurawiki/gptee - 用 RUST 编写的 cli 工具 - 已安装，但无法正常工作，且有错误 - 起初我想叫它 gptee，但当我寻找它时发现了它，所以我就叫它别的名字 - 最新版本在 2023 年 11 月。我安装了它，并且成功了。
+### gpt3
 
-###llm - https://llm.datasette.io/en/stable/ - https://github.com/simonw/llm - `llm prompt -s system-prompt < prompt-text`，所以这可能有效
+- https://github.com/CrazyPython/gpt3-cli
+- 调用 curl 的简单 shell 脚本
+
+### gptee
+
+- https://github.com/zurawiki/gptee
+- 用 RUST 编写的 cli 工具。
+- 已安装，但无法正常工作，且有错误。
+- 起初我想把它命名为 gptee，但当我寻找它时却发现了它，于是我给它取了个别的名字。
+- 安装 2023 年 11 月的最新版本后，它就能正常工作了。
+
+### llm
+
+- https://llm.datasette.io/en/stable/
+- https://github.com/simonw/llm
+- 它可以像 `llm prompt -s system-prompt < prompt-text` 那样使用，所以这可能行得通。
 
 ## INSTALL
 
@@ -89,14 +116,17 @@ pip install git+https://github.com/tecolicom/App-gpty.git
 ## SEE ALSO
 
 ### App::Greple::xlate
-  - https://metacpan.org/dist/App-Greple-xlate
-  - https://github.com/kaz-utashiro/App-Greple-xlate
+
+- https://metacpan.org/dist/App-Greple-xlate
+- https://github.com/kaz-utashiro/App-Greple-xlate
 
 ### App::gpty
-  - https://github.com/tecolicom/App-gpty
+
+- https://github.com/tecolicom/App-gpty
 
 ### openai-python
-  - https://github.com/openai/openai-python
+
+- https://github.com/openai/openai-python
 
 ## AUTHOR
 

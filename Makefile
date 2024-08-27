@@ -17,7 +17,7 @@ README.$1.md: README.md Makefile
 	exec > $$@; \
 	printf "%s\n\n" \
 	"This document is automatically generated from README.md written in Japanese"; \
-	$$(XLATE) -t $1 -o md -- $(GREPLEOPT) $$<
+	$$(XLATE) -t $1 -o md $$< $(GREPLEOPT)
 endef
 
 $(foreach lang,$(LANGS),$(eval $(call LANG_PM,$(lang))))
