@@ -43,14 +43,14 @@ gpty [options] prompts
 
 ### -e, --engine *name*
 
-使用する OpenAI GPT エンジン (default: gpt-3.5-turbo)
+使用する OpenAI GPT エンジン (default: gpt-4o-mini)
 
 ### -e, --engine *alias*
 
 エンジン名には、以下の別名が定義されている:
 
     3: gpt-3.5-turbo
-	4: gpt-4
+    4: gpt-4o-mini
 
 これらは `-e3`、`-e4` のように使うことができる。
 

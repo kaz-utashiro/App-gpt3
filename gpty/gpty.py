@@ -34,7 +34,7 @@ def vers(ctx: typer.Context, value: bool):
 
 aliases = {
     "3": "gpt-3.5-turbo",
-    "4": "gpt-4-1106-preview",
+    "4": "gpt-4o-mini",
 }
 
 @app.command()
@@ -42,7 +42,7 @@ def main(
     prompts:     List[str] = typer.Argument(...,                        help="Input prompts for GPT or '-' to read from stdin"),
     system:      List[str] = typer.Option([], "--system", "-s",         help="Set system message (can be used multiple times)"),
     itemize:     Optional[str] = typer.Option(None, "--itemize", "-I",  help="Itemize other prompts after this message"),
-    engine:      str = typer.Option("gpt-3.5-turbo", "--engine", "-e",  help="OpenAI GPT engine"),
+    engine:      str = typer.Option("gpt-4o-mini", "--engine", "-e",    help="OpenAI GPT engine"),
     max_tokens:  int = typer.Option(2000, "--max-tokens", "-m",         help="Maximum number of tokens in the response"),
     temperature: float = typer.Option(0.5, "--temperature", "-t",       help="Sampling temperature for randomness"),
     key:         Optional[str] = typer.Option(None, "--key", "-k",      help="OpenAI API key"),
@@ -59,7 +59,7 @@ def main(
 
     client = OpenAI(
         # This is the default and can be omitted
-        api_key = os.environ.get("OPENAI_API_KEY"),
+        api_key = api_key
     )
 
     while engine in aliases:
@@ -104,7 +104,7 @@ def main(
         response = client.chat.completions.create(**request_params)
 
     if debug:
-        pprint.pprint(response, indent=2)
+        debug_print(pprint.pformat(response, indent=2))
 
     generated_text = response.choices[0].message.content
 
